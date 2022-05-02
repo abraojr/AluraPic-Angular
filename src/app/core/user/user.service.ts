@@ -15,6 +15,12 @@ export class UserService {
       this.decodeAndNotify();
   }
 
+  private decodeAndNotify() {
+    const token = this.tokenService.getToken();
+    const user = jwt_decode(token) as User;
+    this.userSubject.next(user);
+  }
+
   setToken(token: string) {
     this.tokenService.setToken(token);
     this.decodeAndNotify();
@@ -24,9 +30,9 @@ export class UserService {
     return this.userSubject.asObservable();
   }
 
-  private decodeAndNotify() {
-    const token = this.tokenService.getToken();
-    const user = jwt_decode(token) as User;
-    this.userSubject.next(user);
+  logout() {
+    this.tokenService.removeToken();
+    this.userSubject.next(null);
   }
+
 }
