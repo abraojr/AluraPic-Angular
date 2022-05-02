@@ -2,7 +2,7 @@
 
 <form [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
   <div class="form-group mb-3">
-    <input formControlName="email" placeholder="email" class="form-control" autofocus>
+    <input #emailInput formControlName="email" placeholder="email" class="form-control" autofocus>
     <ap-vmessage *ngIf="signupForm.get('email').errors?.['required']" text="Email is required!"></ap-vmessage>
     <ap-vmessage *ngIf="signupForm.get('email').errors?.['email']" text="Invalid email"></ap-vmessage>
   </div>
@@ -20,8 +20,7 @@
     <ap-vmessage *ngIf="signupForm.get('userName').errors?.['minlength']" text="Minimun length is 2"></ap-vmessage>
     <ap-vmessage *ngIf="signupForm.get('userName').errors?.['maxlength']" text="Maximun length is 30"></ap-vmessage>
     <ap-vmessage *ngIf="signupForm.get('userName').errors?.['lowerCase']" text="Must be lower case"></ap-vmessage>
-    <ap-vmessage *ngIf="signupForm.get('userName').errors?.['userNameTaken']" text="Username already taken">
-    </ap-vmessage>
+    <ap-vmessage *ngIf="signupForm.get('userName').errors?.['userNameTaken']" text="Username already taken"></ap-vmessage>
     <small *ngIf="signupForm.get('userName').valid" class="text-success">User available</small>
   </div>
 
@@ -36,5 +35,5 @@
     <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary">Register</button>
   </div>
 
-  <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
+  <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
 </form>
