@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ap-photo-form',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoFormComponent implements OnInit {
 
-  constructor() { }
+  photoForm: FormGroup
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.photoForm = this.fb.group({
+      file: ['', Validators.required],
+      description: ['', Validators.maxLength(300)],
+      allowComments: [true]
+    });
   }
 
 }
