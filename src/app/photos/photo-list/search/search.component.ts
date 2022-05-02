@@ -22,8 +22,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(event: Event): string {
-
-    const filterValue = (event.target as HTMLInputElement).value;;
-    return filterValue
+    const filterValue = (event.target as HTMLInputElement).value;
+    return filterValue;
   }
 }
