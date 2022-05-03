@@ -1,7 +1,7 @@
 <div *ngIf="(comments$ | async) as comments">
   <ul class="list-unstyled">
     <li *ngFor="let comment of comments">
-      <a class="text-dark font-weight-bold mr-1" [routerLink]="['/user', comment.userName]">
+      <a class=" text-decoration-none text-dark fw-bold me-1" [routerLink]="['/user', comment.userName]">
         {{ comment.userName }}
       </a>
       <em>
@@ -13,7 +13,7 @@
     </li>
   </ul>
   <div class="mt-4">
-    <form [formGroup]="commentForm">
+    <form [formGroup]="commentForm" (submit)="save()">
       <div class="input-group">
         <textarea formControlName="comment" class="form-control"></textarea>
         <button [disabled]="commentForm.invalid" type="submit" class="btn btn-primary pull-left">
