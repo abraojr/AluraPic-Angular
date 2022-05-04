@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  ApiUrl: 'http://suaapientraaqui'
+  ApiUrl: 'http://setyourapi',
+  serverLog: 'http://yourapi'
 };
