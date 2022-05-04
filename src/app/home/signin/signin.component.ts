@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -14,10 +13,9 @@ export class SignInComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
   @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private platformDetectorService: PlatformDetectorService, private titleService: Title) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private platformDetectorService: PlatformDetectorService) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Login');
     this.loginForm = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
