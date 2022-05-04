@@ -6,11 +6,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { FooterComponent } from './footer/footer.component';
+import { AlertModule } from '../shared/components/alert/alert.module';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
   exports: [HeaderComponent, FooterComponent],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, AlertModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
