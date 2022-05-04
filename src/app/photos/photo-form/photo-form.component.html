@@ -31,16 +31,22 @@
           <input formControlName="allowComments" type="checkbox">
         </label>
       </div>
+      <div *ngIf="!percentDone; else uploadPhoto">
+        <div class="d-grid gap-2 mt-2">
+          <button [disabled]="photoForm.invalid" type="submit" class="btn btn-primary ">
+            Upload
+          </button>
+        </div>
 
-      <div class="d-grid gap-2 mt-2">
-        <button [disabled]="photoForm.invalid" type="submit" class="btn btn-primary ">
-          Upload
-        </button>
+        <div class="d-grid gap-2 mt-2">
+          <a [routerLink]="['']" class="btn btn-secondary ">Cancel</a>
+        </div>
       </div>
-
-      <div class="d-grid gap-2 mt-2">
-        <a class="btn btn-secondary ">Cancel</a>
-      </div>
+      <ng-template #uploadPhoto>
+        <div class="text-center display-4">
+          uploading {{percentDone}}%
+        </div>
+      </ng-template>
     </div>
   </form>
 </div>
