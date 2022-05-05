@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
@@ -10,12 +10,17 @@ import { PlatformDetectorService } from 'src/app/core/platform-detector/platform
 })
 export class SignInComponent implements OnInit, AfterViewInit {
 
+  fromUrl: string = '';
   loginForm: FormGroup;
   @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private platformDetectorService: PlatformDetectorService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private platformDetectorService: PlatformDetectorService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe({
+      next: params => this.fromUrl = params['fromUrl']
+    });
+
     this.loginForm = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
@@ -35,7 +40,7 @@ export class SignInComponent implements OnInit, AfterViewInit {
     this.authService
       .authenticate(userName, password)
       .subscribe({
-        next: () => this.router.navigate(['user', userName]),
+        next: () => this.fromUrl ? this.router.navigateByUrl(this.fromUrl) : this.router.navigate(['user', userName]),
         error: (err) => {
           console.log(err);
           this.loginForm.reset();
