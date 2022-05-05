@@ -65,6 +65,9 @@
       *ngIf="signupForm.get('password').errors?.['maxlength'] && (form.submitted || signupForm.get('password').touched)"
       text="Maximun length is 14">
     </ap-vmessage>
+    <ap-vmessage *ngIf="signupForm.errors?.['userNamePassword'] && form.submitted"
+      text="Username and password must be different">
+    </ap-vmessage>
   </div>
 
   <div class="d-grid gap-2">

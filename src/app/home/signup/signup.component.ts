@@ -7,10 +7,11 @@ import { NewUser } from './new-user';
 import { SignUpService } from './signup.service';
 import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
 import { PlatformDetectorService } from './../../core/platform-detector/platform-detector.service';
+import { UserNamePasswordValidatorService } from './username-password.validator.service';
 
 @Component({
   templateUrl: './signup.component.html',
-  providers: [UserNotTakenValidatorService]
+  providers: [UserNotTakenValidatorService, UserNamePasswordValidatorService]
 })
 export class SignUpComponent implements OnInit, AfterViewInit {
 
@@ -22,7 +23,8 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     private userNotTakenValidatorService: UserNotTakenValidatorService,
     private signUpService: SignUpService,
     private router: Router,
-    private platformDetectorService: PlatformDetectorService) { }
+    private platformDetectorService: PlatformDetectorService,
+    private userNamePassword: UserNamePasswordValidatorService) { }
 
 
   ngOnInit(): void {
@@ -56,9 +58,9 @@ export class SignUpComponent implements OnInit, AfterViewInit {
           Validators.maxLength(14)
         ]
       ]
+    }, {
+      validators: this.userNamePassword.userNamePasswordValidator()
     });
-
-
   }
 
   ngAfterViewInit(): void {
